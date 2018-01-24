@@ -86,6 +86,8 @@ if ($options['courseid']) {
 cli_heading('Performing backup...');
 $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
                             backup::INTERACTIVE_YES, backup::MODE_GENERAL, $admin->id);
+// Perform backup without user data
+$bc->get_plan()->get_setting('users')->set_value(false);
 // Set the default filename.
 $format = $bc->get_format();
 $type = $bc->get_type();
